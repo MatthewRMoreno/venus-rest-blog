@@ -21,9 +21,11 @@ public class PostsController {
     public Post fetchPostById(@PathVariable long id) {
         // search through the list of posts and return the post
         // that matches the given id
-        Post posts = findPostById(id);
-        //what to do if we don't find it
-        throw new RuntimeException("I don't know what I was doing");
+        Post post = findPostById(id);
+        if (post == null) {
+            throw new RuntimeException("I dont know what I was doing");
+        }
+        return post;
     }
 
     public Post findPostById(long id) {

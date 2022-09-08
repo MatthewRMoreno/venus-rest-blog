@@ -11,7 +11,7 @@ public class PostsController {
 
     private List<Post> posts = new ArrayList<>();
 
-    @GetMapping("/")
+    @GetMapping("")
 //    @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Post> fetchPosts() {
         return posts;
@@ -35,7 +35,7 @@ public class PostsController {
             return null;
         }
 
-    @PostMapping("/")
+    @PostMapping("")
     public void createPost(@RequestBody Post newPost){
         posts.add(newPost);
     }

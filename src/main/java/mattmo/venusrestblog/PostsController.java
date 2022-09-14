@@ -1,6 +1,9 @@
 package mattmo.venusrestblog;
 
+
+import mattmo.venusrestblog.data.Category;
 import mattmo.venusrestblog.data.Post;
+import mattmo.venusrestblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,7 +18,6 @@ public class PostsController {
     @GetMapping("")
 //    @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Post> fetchPosts() {
-        System.out.println("Hey I made a change!");
         return posts;
     }
 
@@ -48,6 +50,21 @@ public class PostsController {
 //        System.out.println(newPost);
         // assign  nextId to the new post
         newPost.setId(nextId);
+
+        // use a fake author for the post
+        User fakeAuthor = new User();
+        fakeAuthor.setId(99);
+        fakeAuthor.setUserName("fake author");
+        fakeAuthor.setEmail("fakeauthor@stuff.com");
+        newPost.setAuthor((org.apache.catalina.User) fakeAuthor);
+
+        // make some fake categories and throw them in the new post
+        Category cat1 = new Category(1L, "bunnies", null);
+        Category cat2 = new Category(2L, "margaritas", null);
+        newPost.setCategories(new ArrayList<>());
+        newPost.getCategories().add(cat1);
+        newPost.getCategories().add(cat2);
+
         nextId++;
 
         posts.add(newPost);

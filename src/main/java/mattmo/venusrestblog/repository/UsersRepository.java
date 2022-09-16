@@ -1,4 +1,4 @@
-package mattmo.venusrestblog;
+package mattmo.venusrestblog.repository;
 
 import mattmo.venusrestblog.data.User;
 import org.springframework.data.jpa.repository.JpaRepository;

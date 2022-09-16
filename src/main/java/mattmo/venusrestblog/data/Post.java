@@ -14,6 +14,20 @@ import java.util.Collection;
 @Entity
 @Table(name="posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 100)
+    private String title;
+
+    @Column(nullable = false, length = 1024)
+    private String content;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"posts", "password"})
+    private User author;
+
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.REFRESH},

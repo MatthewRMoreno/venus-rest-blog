@@ -56,7 +56,7 @@ public class PostsController {
         fakeAuthor.setId(99);
         fakeAuthor.setUserName("fake author");
         fakeAuthor.setEmail("fakeauthor@stuff.com");
-        newPost.setAuthor((org.apache.catalina.User) fakeAuthor);
+        newPost.setAuthor((User) fakeAuthor);
 
         // make some fake categories and throw them in the new post
         Category cat1 = new Category(1L, "bunnies", null);

@@ -1,4 +1,4 @@
-package mattmo.venusrestblog;
+package mattmo.venusrestblog.Controllers;
 
 import mattmo.venusrestblog.data.Category;
 import mattmo.venusrestblog.data.Post;

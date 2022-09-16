@@ -16,8 +16,10 @@ import java.util.Collection;
 public class Category {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany(
@@ -32,6 +34,5 @@ public class Category {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
     @JsonIgnoreProperties("categories")
-
     private Collection<Post> posts;
 }

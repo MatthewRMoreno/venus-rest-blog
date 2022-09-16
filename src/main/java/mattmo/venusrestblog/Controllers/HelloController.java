@@ -1,4 +1,4 @@
-package mattmo.venusrestblog;
+package mattmo.venusrestblog.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

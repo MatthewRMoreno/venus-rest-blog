@@ -1,5 +1,6 @@
-package mattmo.venusrestblog;
+package mattmo.venusrestblog.Controllers;
 
+import mattmo.venusrestblog.fakeDogGateway;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

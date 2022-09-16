@@ -6,7 +6,6 @@ export default function prepareUserHTML(props) {
 
     const userPostHTML = createPostHTML(me);
 
-    // make the user's original pw available somewhere in here
     return `
         <h1>User Info</h1>
         <h2>${props.me.userName}</h2>
@@ -94,7 +93,6 @@ function doSavePasswordHandler() {
 function doTogglePasswordHandler() {
     const button = document.querySelector("#toggleShowPassword");
     button.addEventListener("click", function(event) {
-        // grab a reference to confirmpassword
         const oldPassword = document.querySelector("#oldpassword");
         const newPassword = document.querySelector("#newpassword");
         const confirmPassword = document.querySelector("#confirmpassword");

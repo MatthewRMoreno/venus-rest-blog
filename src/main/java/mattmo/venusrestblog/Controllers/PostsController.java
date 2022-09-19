@@ -57,14 +57,14 @@ public class PostsController {
         postsRepository.save(newPost);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePostById(@PathVariable long id) {
-        Optional<Post> optionalPost = postsRepository.findById(id);
-        if(optionalPost.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post id " + id + " not found");
-        }
-        postsRepository.deleteById(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public void deletePostById(@PathVariable long id) {
+//        Optional<Post> optionalPost = postsRepository.findById(id);
+//        if(optionalPost.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post id " + id + " not found");
+//        }
+//        postsRepository.deleteById(id);
+//    }
 
     @PutMapping("/{id}")
     public void updatePost(@RequestBody Post updatedPost, @PathVariable long id) {

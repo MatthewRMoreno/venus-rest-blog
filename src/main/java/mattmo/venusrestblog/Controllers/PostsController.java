@@ -58,7 +58,7 @@ public class PostsController {
 
         postsRepository.save(newPost);
 
-        emailService.prepareAndSend(newPost, "email","Hey, you just made a new post");
+        emailService.prepareAndSend(newPost, "New Post","Hey, you just made a new post");
     }
 
 //    @DeleteMapping("/{id}")

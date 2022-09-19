@@ -43,7 +43,6 @@ public class PostsController {
     @PostMapping("")
     public void createPost(@RequestBody Post newPost) {
 
-        // use docrob as author by default
         User author = usersRepository.findById(1L).get();
         newPost.setAuthor(author);
         newPost.setCategories(new ArrayList<>());

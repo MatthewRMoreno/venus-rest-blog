@@ -68,15 +68,13 @@ public class PostsController {
 
     @PutMapping("/{id}")
     public void updatePost(@RequestBody Post updatedPost, @PathVariable long id) {
-        Optional<Post> originalPost = postsRepository.findById(id);
-        if(originalPost.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post " + id + " not found");
-        }
-
+        // in case id  is not in req body set it with path var id
         updatedPost.setId(id);
+        postsRepository.save(updatedPost);
+    }
 
-        BeanUtils.copyProperties(updatedPost, originalPost.get(), FieldHelper.getNullPropertyNames(updatedPost));
-
-        postsRepository.save(originalPost.get());
+    @DeleteMapping ("/{id}")
+    public void DeletePostById(@PathVariable long id) {
+        postsRepository.deleteById(id);
     }
 }

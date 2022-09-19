@@ -1,5 +1,6 @@
 package mattmo.venusrestblog.security;
 
+import mattmo.venusrestblog.data.User;
 import mattmo.venusrestblog.repository.UsersRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

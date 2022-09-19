@@ -10,6 +10,7 @@ import mattmo.venusrestblog.misc.FieldHelper;
 import mattmo.venusrestblog.repository.CategoriesRepository;
 import mattmo.venusrestblog.repository.PostsRepository;
 import mattmo.venusrestblog.repository.UsersRepository;
+import mattmo.venusrestblog.service.EmailService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/api/posts", produces = "application/json")
 public class PostsController {
+    private EmailService emailService;
     private PostsRepository postsRepository;
     private UsersRepository usersRepository;
     private CategoriesRepository categoriesRepository;
@@ -48,13 +50,15 @@ public class PostsController {
         newPost.setAuthor(author);
         newPost.setCategories(new ArrayList<>());
 
-        Category cat1 = categoriesRepository.findById(1L).get();
-        Category cat2 = categoriesRepository.findById(2L).get();
+        Category cat = categoriesRepository.findById(1L).get();
+        Category dog = categoriesRepository.findById(2L).get();
 
-        newPost.getCategories().add(cat1);
-        newPost.getCategories().add(cat2);
+        newPost.getCategories().add(cat);
+        newPost.getCategories().add(dog);
 
         postsRepository.save(newPost);
+
+        emailService.prepareAndSend(newPost, "email","Hey, you just made a new post");
     }
 
 //    @DeleteMapping("/{id}")

@@ -41,21 +41,6 @@ public class UsersController {
         return usersRepository.findById(1L);
     }
 
-//    @GetMapping("/username/{userName}")
-//    private User fetchByUserName(@PathVariable String userName) {
-//
-//    }
-
-//    @GetMapping("/email/{email}")
-//    private User fetchByEmail(@PathVariable String email) {
-//        User user = findUserByEmail(email);
-//        if(user == null) {
-//            // what to do if we don't find it
-//            throw new RuntimeException("I don't know what I am doing");
-//        }
-//        return user;
-//    }
-
     @PostMapping("/create")
     public void createUser(@RequestBody User newUser) {
         // TODO: validate new user fields

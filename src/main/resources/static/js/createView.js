@@ -10,6 +10,7 @@ import {getHeaders, removeStaleTokens} from "./auth.js";
 export default async function createView(URI) {
     // createView must wait for stale token removal before finishing view creation
     await removeStaleTokens();
+
     let route = router(URI);
 
     let currentTitle = document.title;

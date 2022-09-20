@@ -47,7 +47,7 @@ public class PostsController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('USER') && hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public void createPost(@RequestBody Post newPost, OAuth2Authentication auth) {
 //        if(auth == null) {
 //            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
@@ -80,7 +80,7 @@ public class PostsController {
 //    }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') && hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public void updatePost(@RequestBody Post updatedPost, @PathVariable long id) {
         Optional<Post> originalPost = postsRepository.findById(id);
         if(originalPost.isEmpty()) {
@@ -95,7 +95,7 @@ public class PostsController {
 
         postsRepository.save(originalPost.get());
     }
-    @PreAuthorize("hasAuthority('USER') && hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     @DeleteMapping ("/{id}")
     public void DeletePostById(@PathVariable long id) {
         postsRepository.deleteById(id);

@@ -14,6 +14,7 @@ import mattmo.venusrestblog.security.OAuthConfiguration;
 import mattmo.venusrestblog.service.EmailService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -46,7 +47,12 @@ public class PostsController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('USER') && hasAuthority('ADMIN')")
     public void createPost(@RequestBody Post newPost, OAuth2Authentication auth) {
+//        if(auth == null) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+//        }
+
         String userName = auth.getName();
         User author = usersRepository.findByUserName(userName);
         newPost.setAuthor(author);
@@ -74,6 +80,7 @@ public class PostsController {
 //    }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER') && hasAuthority('ADMIN')")
     public void updatePost(@RequestBody Post updatedPost, @PathVariable long id) {
         Optional<Post> originalPost = postsRepository.findById(id);
         if(originalPost.isEmpty()) {
@@ -88,7 +95,7 @@ public class PostsController {
 
         postsRepository.save(originalPost.get());
     }
-
+    @PreAuthorize("hasAuthority('USER') && hasAuthority('ADMIN')")
     @DeleteMapping ("/{id}")
     public void DeletePostById(@PathVariable long id) {
         postsRepository.deleteById(id);

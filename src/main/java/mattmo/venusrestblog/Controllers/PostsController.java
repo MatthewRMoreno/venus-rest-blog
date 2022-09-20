@@ -10,9 +10,11 @@ import mattmo.venusrestblog.misc.FieldHelper;
 import mattmo.venusrestblog.repository.CategoriesRepository;
 import mattmo.venusrestblog.repository.PostsRepository;
 import mattmo.venusrestblog.repository.UsersRepository;
+import mattmo.venusrestblog.security.OAuthConfiguration;
 import mattmo.venusrestblog.service.EmailService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -44,10 +46,11 @@ public class PostsController {
     }
 
     @PostMapping("")
-    public void createPost(@RequestBody Post newPost) {
-
-        User author = usersRepository.findById(2L).get();
+    public void createPost(@RequestBody Post newPost, OAuth2Authentication auth) {
+        String userName = auth.getName();
+        User author = usersRepository.findByUserName(userName);
         newPost.setAuthor(author);
+
         newPost.setCategories(new ArrayList<>());
 
         Category cat = categoriesRepository.findById(1L).get();

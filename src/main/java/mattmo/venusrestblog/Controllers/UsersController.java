@@ -6,8 +6,10 @@ import mattmo.venusrestblog.data.User;
 import mattmo.venusrestblog.data.UserRole;
 import mattmo.venusrestblog.misc.FieldHelper;
 import mattmo.venusrestblog.repository.UsersRepository;
+import mattmo.venusrestblog.security.ServerSecurityConfig;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,6 +24,8 @@ import java.util.Optional;
 @RequestMapping(value = "/api/users", produces = "application/json")
 public class UsersController {
     private UsersRepository usersRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public List<User> fetchUsers() {
@@ -39,12 +43,17 @@ public class UsersController {
 
     @GetMapping("/me")
     private Optional<User> fetchMe() {
-        return usersRepository.findById(1L);
+        return usersRepository.findById(2L);
     }
 
     @PostMapping("/create")
     public void createUser(@RequestBody User newUser) {
         // TODO: validate new user fields
+        newUser.setRole(UserRole.USER);
+
+        String plainTextPassword = newUser.getPassword();
+        String encryptedPassword = passwordEncoder.encode(plainTextPassword);
+        newUser.setPassword(encryptedPassword);
 
         // don't need the below line at this point but just for kicks
         newUser.setCreatedAt(LocalDate.now());

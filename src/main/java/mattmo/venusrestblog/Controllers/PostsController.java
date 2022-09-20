@@ -46,7 +46,7 @@ public class PostsController {
     @PostMapping("")
     public void createPost(@RequestBody Post newPost) {
 
-        User author = usersRepository.findById(1L).get();
+        User author = usersRepository.findById(2L).get();
         newPost.setAuthor(author);
         newPost.setCategories(new ArrayList<>());
 

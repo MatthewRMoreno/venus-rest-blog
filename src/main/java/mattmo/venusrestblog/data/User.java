@@ -45,5 +45,4 @@ public class User {
     @OneToMany(mappedBy = "author")
     @JsonIgnoreProperties("author")
     private Collection<Post> posts;
-
 }

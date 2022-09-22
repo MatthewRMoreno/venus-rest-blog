@@ -49,10 +49,6 @@ public class PostsController {
     @PostMapping("")
     @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public void createPost(@RequestBody Post newPost, OAuth2Authentication auth) {
-//        if(auth == null) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-//        }
-
         String userName = auth.getName();
         User author = usersRepository.findByUserName(userName);
         newPost.setAuthor(author);
@@ -70,15 +66,6 @@ public class PostsController {
         emailService.prepareAndSend(newPost, "New Post","Hey, you just made a new post");
     }
 
-//    @DeleteMapping("/{id}")
-//    public void deletePostById(@PathVariable long id) {
-//        Optional<Post> optionalPost = postsRepository.findById(id);
-//        if(optionalPost.isEmpty()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post id " + id + " not found");
-//        }
-//        postsRepository.deleteById(id);
-//    }
-
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public void updatePost(@RequestBody Post updatedPost, @PathVariable long id) {
@@ -95,6 +82,7 @@ public class PostsController {
 
         postsRepository.save(originalPost.get());
     }
+
     @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     @DeleteMapping ("/{id}")
     public void DeletePostById(@PathVariable long id) {

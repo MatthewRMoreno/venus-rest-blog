@@ -1,4 +1,4 @@
-package mattmo.venusrestblog.DTO;
+package mattmo.venusrestblog.misc.DTO;
 
 import lombok.*;
 

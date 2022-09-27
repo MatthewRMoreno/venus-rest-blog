@@ -142,6 +142,7 @@ function setupDeleteHandlers() {
         });
     }
 }
+//This is the function to delete the posts
 
 function deletePost(postId) {
     const request = {

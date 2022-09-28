@@ -174,7 +174,7 @@ function setupSaveHandler() {
         savePost(postId);
     });
 }
-
+//this is to create and save the post
 function savePost(postId) {
     // get the title and content for the new/updated post
     const titleField = document.querySelector("#title");
